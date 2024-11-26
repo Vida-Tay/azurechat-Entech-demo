@@ -82,11 +82,11 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            rg=$(az webapp list --query "[?name=='azure-chat-demo-webapp-f2zdrafh3uvys'].resourceGroup" --output tsv)
-            echo Setting SCM_DO_BUILD_DURING_DEPLOYMENT=false on app service ${{ secrets.AZURE_APP_SERVICE_NAME }}
-            az webapp config appsettings set -n ${{ secrets.AZURE_APP_SERVICE_NAME }} -g $rg --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false -o none
-            echo Setting --startup-file=\"node server.js\" on app service ${{ secrets.AZURE_APP_SERVICE_NAME }}
-            az webapp config set --startup-file="node server.js" -n ${{ secrets.AZURE_APP_SERVICE_NAME }} -g $rg -o none
+            rg="entech-chat-demo"
+            echo "Setting SCM_DO_BUILD_DURING_DEPLOYMENT=false on app service azure-chat-demo-webapp-f2zdrafh3uvys"
+            az webapp config appsettings set -n azure-chat-demo-webapp-f2zdrafh3uvys -g "$rg" --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false -o none
+            echo "Setting --startup-file=\"node server.js\" on app service azure-chat-demo-webapp-f2zdrafh3uvys"
+            az webapp config set --startup-file="node server.js" -n azure-chat-demo-webapp-f2zdrafh3uvys -g "$rg" -o none
             sleep 10
 
       - name: 🚀 Deploy to Azure Web App
